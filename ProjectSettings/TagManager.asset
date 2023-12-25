@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
+  - obstruction
+  - fish
   layers:
   - Default
   - TransparentFX

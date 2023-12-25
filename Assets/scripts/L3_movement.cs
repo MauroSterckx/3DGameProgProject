@@ -5,38 +5,43 @@ using UnityEngine;
 public class L3_movement : MonoBehaviour
 {
     public Rigidbody body;
+    public Rigidbody enemy;
     public float speed = 5f;
 
     public float stopZPosition = 0f; // Z-positie waarop de beweging moet stoppen
     public float maxZPosition = 5f; // Maximale Z-positie waarop de beweging moet stoppen
 
-    private char dest = 'X';
+    private bool inchange = false;
 
     // Start is called before the first frame update
     void Start()
     {
         body.velocity = new Vector3(-speed,0,0);
+        enemy.velocity = new Vector3(-speed, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveCam();
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && inchange == false)
         {
             //jump
         }
-        if (Input.GetKey("q")) //pas aan naar a
+        if (Input.GetKey("q") && inchange == false) //pas aan naar a
         {
-            body.velocity = new Vector3(-speed,0,5);
-            StartCoroutine(StopLaner());   
-            
-            
-        }
-        if (Input.GetKey("d"))
-        {
-            body.velocity = new Vector3(-speed, 0, -5);
+            inchange = true;
+            body.velocity = new Vector3(-speed,0,-5);
             StartCoroutine(StopLaner());
+            
+
+        }
+        if (Input.GetKey("d") && inchange == false)
+        {
+            inchange = true;
+            body.velocity = new Vector3(-speed, 0, 5);
+            StartCoroutine(StopLaner());
+            
         }
         
     }
@@ -51,6 +56,7 @@ public class L3_movement : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         body.velocity = new Vector3(-speed, 0, 0);
+        inchange = false;
     }
     
 }
