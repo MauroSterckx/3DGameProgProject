@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class L3_movement : MonoBehaviour
 {
@@ -14,9 +15,16 @@ public class L3_movement : MonoBehaviour
     private bool inchange = false;
     public float CamLockedPos = 2.880166f;
 
+    public int fishcount = 0;
+    public Text textelement;
+
+    public Text GO_text_points;
+    public GameObject endscene;
+
     // Start is called before the first frame update
     void Start()
     {
+        endscene.SetActive(false);
         body.velocity = new Vector3(-speed,0,0);
         enemy.velocity = new Vector3(-speed, 0, 0);
     }
@@ -51,10 +59,18 @@ public class L3_movement : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // Controleer of het object waarmee het personage botst de tag "fish" heeft
+        if (collision.gameObject.CompareTag("obstruction"))
+        {
+            // Voer hier de acties uit die moeten plaatsvinden als het personage een "fish" raakt (bijvoorbeeld doodgaan)
+            // Voeg hier je eigen doodgaan-implementatie toe
+            HandleDeath();
+        }
         if (collision.gameObject.CompareTag("fish"))
         {
             // Voer hier de acties uit die moeten plaatsvinden als het personage een "fish" raakt (bijvoorbeeld doodgaan)
             // Voeg hier je eigen doodgaan-implementatie toe
+            Destroy(collision.gameObject);
+            //HandleFish();
             HandleDeath();
         }
     }
@@ -64,6 +80,15 @@ public class L3_movement : MonoBehaviour
     {
         // Implementeer hier wat er moet gebeuren wanneer het personage "dood" gaat
         Debug.Log("Het personage is dood gegaan!");
+        gameover();
+    }
+    void HandleFish()
+    {
+        // Implementeer hier wat er moet gebeuren wanneer het personage "dood" gaat
+        fishcount++;
+        Debug.Log(fishcount);
+        textelement.text = $"Points : {fishcount}";
+
     }
 
     void MoveCam()
@@ -74,6 +99,12 @@ public class L3_movement : MonoBehaviour
         Camera.main.transform.position = newPosition;
         //
         Camera.main.transform.Translate(new Vector3(0f, 0f, speed * Time.deltaTime));
+    }
+
+    void gameover()
+    {
+        GO_text_points.text = $"Points : {fishcount}";
+        endscene.SetActive(true);
     }
 
     IEnumerator StopLaner()
