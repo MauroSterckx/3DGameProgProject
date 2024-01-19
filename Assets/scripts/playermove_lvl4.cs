@@ -11,6 +11,13 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> waypoints;
     private int currentWaypointIndex = 0;
 
+    public Canvas einde;
+
+    private void Start()
+    {
+        einde.enabled = false;
+    }
+
     private void Update()
     {
         MoveCamera();
@@ -25,7 +32,8 @@ public class PlayerController : MonoBehaviour
 
             if (Vector3.Distance(transform.position, waypoints[currentWaypointIndex].transform.position) < 0.1f)
             {
-                currentWaypointIndex++;
+                Time.timeScale = 0;
+                einde.enabled = true;
             }
         }
     }
@@ -35,8 +43,6 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         transform.position += (moveSpeed * moveHorizontal) * Time.deltaTime * Vector3.back;
 
-        Debug.Log("Horizontal Input: " + moveHorizontal);
-        Debug.Log("Character Position: " + transform.position);
     }
 
     private void OnHorizontal(InputValue value)
@@ -48,9 +54,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += (moveSpeed * horizontal) * Time.deltaTime * Vector3.forward;
         }
-
-        Debug.Log("Horizontal Input: " + horizontal);
-        Debug.Log("Character Position: " + transform.position);
     }
 
     private bool IsColliding()
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Obstacle"))
+            if (collider.CompareTag("obstakel"))
             {
                 return true;
             }
