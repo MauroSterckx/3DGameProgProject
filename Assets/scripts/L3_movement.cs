@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class L3_movement : MonoBehaviour
 {
@@ -21,18 +23,21 @@ public class L3_movement : MonoBehaviour
     public Text GO_text_points;
     public GameObject endscene;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
         endscene.SetActive(false);
         body.velocity = new Vector3(-speed,0,0);
         enemy.velocity = new Vector3(-speed, 0, 0);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveCam();
+        //MoveCam();
         if (Input.GetKey(KeyCode.Space) && inchange == false)
         {
             //jump
@@ -70,8 +75,8 @@ public class L3_movement : MonoBehaviour
             // Voer hier de acties uit die moeten plaatsvinden als het personage een "fish" raakt (bijvoorbeeld doodgaan)
             // Voeg hier je eigen doodgaan-implementatie toe
             Destroy(collision.gameObject);
-            //HandleFish();
-            HandleDeath();
+            HandleFish();
+            //HandleDeath();
         }
     }
 
@@ -97,9 +102,10 @@ public class L3_movement : MonoBehaviour
         Vector3 newPosition = Camera.main.transform.position;
         newPosition.y = CamLockedPos; // Stel de Y-positie in op de vergrendelde waarde
         Camera.main.transform.position = newPosition;
-        //
         Camera.main.transform.Translate(new Vector3(0f, 0f, speed * Time.deltaTime));
     }
+
+
 
     void gameover()
     {
