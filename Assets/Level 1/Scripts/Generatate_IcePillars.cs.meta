@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 1dc91be667ae3bf4a8003f373901db11
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - icePillar: {fileID: 3878530435181627829, guid: 7dd23e0ccc0bee441888d925d8a0906c,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
