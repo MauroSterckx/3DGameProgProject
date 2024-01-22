@@ -47,7 +47,6 @@ public class BlockController : MonoBehaviour
 
         Vector3 movement = new Vector3(moveZ, 0.0f, moveX);
         movement = transform.TransformDirection(movement) * moveSpeed * Time.deltaTime;
-
         rb.MovePosition(rb.position + movement);
     }
 
@@ -55,8 +54,8 @@ public class BlockController : MonoBehaviour
     {
         float rotateAmount = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
 
-        Quaternion newRotation = Quaternion.Euler(0.0f, rotateAmount, 0.0f) * rb.rotation;
 
+        Quaternion newRotation = Quaternion.Euler(0.0f, rotateAmount, 0.0f) * rb.rotation;
         float angle = Quaternion.Angle(rb.rotation, newRotation);
         if (angle <= maxRotationAngle)
         {

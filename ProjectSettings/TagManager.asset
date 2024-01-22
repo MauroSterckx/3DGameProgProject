@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ground
   - Block
+  - obstakel
+  - pickup
+  - obstruction
+  - fish
   layers:
   - Default
   - TransparentFX
