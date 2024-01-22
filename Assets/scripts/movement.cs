@@ -43,7 +43,6 @@ public class BlockController : MonoBehaviour
 
         Vector3 movement = new Vector3(moveX, 0.0f, moveZ);
         movement = transform.TransformDirection(movement) * moveSpeed * Time.deltaTime;
-
         rb.MovePosition(rb.position + movement);
     }
 
@@ -51,8 +50,8 @@ public class BlockController : MonoBehaviour
     {
         float rotateAmount = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
 
-        Quaternion newRotation = Quaternion.Euler(0.0f, rotateAmount, 0.0f) * rb.rotation;
 
+        Quaternion newRotation = Quaternion.Euler(0.0f, rotateAmount, 0.0f) * rb.rotation;
         float angle = Quaternion.Angle(rb.rotation, newRotation);
         if (angle <= maxRotationAngle)
         {
@@ -63,7 +62,6 @@ public class BlockController : MonoBehaviour
     void Jump()
     {
         float jumpVelocity = Mathf.Sqrt(2 * jumpForce * Mathf.Abs(Physics.gravity.y));
-
         Vector3 newVelocity = rb.velocity;
         newVelocity.y = jumpVelocity;
         rb.velocity = newVelocity;
