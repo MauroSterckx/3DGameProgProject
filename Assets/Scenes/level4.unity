@@ -11523,6 +11523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1407340437}
   canvaske: {fileID: 679346470}
+  audioClip: {fileID: 8300000, guid: 0bd3aafe482a9864399b4d0b4de66a34, type: 3}
   explosionParticle: {fileID: 3071410628197516894, guid: 898f63f7fc35c2e4c987e125c1cd7206,
     type: 3}
   textje: {fileID: 1208686728}
