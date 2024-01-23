@@ -9,6 +9,7 @@ public class PlayerCollision_lvl4 : MonoBehaviour
 {
     public Canvas canvas;
     public Canvas canvaske;
+    public AudioClip audioClip;
     public GameObject explosionParticle;
 
     public TMP_Text textje;
@@ -51,6 +52,20 @@ public class PlayerCollision_lvl4 : MonoBehaviour
             punten++;
             textje.text = "score: " + punten;
             Instantiate(explosionParticle, transform.position, transform.rotation);
+            if (audioClip)
+            {
+                if (gameObject.GetComponent<AudioSource>())
+                {
+                    //gameobject has audiosource
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(audioClip);
+                }
+                else
+                {
+
+                    //add audiosource to gameobject: dynamically create object with audiosource,it will remove itself
+                    AudioSource.PlayClipAtPoint(audioClip, transform.position);
+                }
+            }
             Destroy(collision.gameObject);
         }
     }
