@@ -6,6 +6,8 @@ TagManager:
   tags:
   - obstakel
   - pickup
+  - obstruction
+  - fish
   layers:
   - Default
   - TransparentFX
